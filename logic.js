@@ -1,20 +1,27 @@
 //Create the function to determine marker size base on eartkquake magnitude.
 function getColor(d) {
-    return d > 5  ? '#E31A1C' :
-           d > 4  ? '#FC4E2A' :
-           d > 3   ? '#FD8D3C' :
-           d > 2   ? '#FEB24C' :
-           d > 1   ? '#FED976' :
-                      '#FFEDA0';
+    if (mag <= 1) {
+        return "#ADFF2F";
+    } else if (mag <= 2) {
+        return "#9ACD32";
+    } else if (mag <= 3) {
+        return "#FFFF00";
+    } else if (mag <= 4) {
+        return "#ffd700";
+    } else if (mag <= 5) {
+        return "#FFA500";
+    } else {
+        return "#FF0000";
+    };
 }
 
 
-// Store the API endpoint inside the queryURL.
-
+// Create query url.
 var queryURL = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
-// Perform a GET request to the query URL.
+// GET request to the query URL.
 d3.json(queryURL, function(data){
+
   //CreateFeatures object for the Create features function.
   createFeatures(data.features);
 });
@@ -33,8 +40,7 @@ function createFeatures(earthquakeData) {
 	//Sending the earthquakes layer to the createMap function.
 	createMap(earthquakes);
 
-
-   		
+  		
    	function pointToLayer(feature,latlng){
    		return new L.circle(latlng,{
    			stroke:false,
