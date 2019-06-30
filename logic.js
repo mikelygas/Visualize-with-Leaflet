@@ -1,5 +1,5 @@
 //Create the function to determine marker size base on eartkquake magnitude.
-function getColor(d) {
+function getColor(mag) {
     if (mag <= 1) {
         return "#ADFF2F";
     } else if (mag <= 2) {
